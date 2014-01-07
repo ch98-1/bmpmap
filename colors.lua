@@ -1,0 +1,4 @@
+elevation = { }
+water = { }
+ice = { }
+biome = { }
