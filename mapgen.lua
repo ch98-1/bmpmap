@@ -11,11 +11,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
         }
  
         local data = vm:get_data()
- 
-        local c_dirt  = minetest.get_content_id("default:dirt")
-        local c_grass = minetest.get_content_id("default:dirt_with_grass")
-        local c_water = minetest.get_content_id("default:water_source")
- 
+
         local sidelen = maxp.x - minp.x + 1
  
         local noise = minetest.get_perlin_map(
@@ -28,18 +24,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
         for z = minp.z, maxp.z do
         for y = minp.y, maxp.y do
         for x = minp.x, maxp.x do
-                if nvals[ni] - (y - 25) / 55 > 0.5 then
-                        local vi = a:index(x, y, z)
-                        if y < 1 then
-                                data[vi] = c_dirt
-                        else
-                                data[vi] = c_grass
-                        end
-                elseif y < 1 then
-                        local vi = a:index(x, y, z)
-                        data[vi] = c_water
-                end
-                ni = ni + 1
+            data[vi] = getnode(x, y, z)
         end
         end
         end
