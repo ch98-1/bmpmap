@@ -1,5 +1,7 @@
 bmpmap
 ======
+test v 0.1 
+empty map to test for bug.
 
 minetest mod to create map from bmp images.
 
