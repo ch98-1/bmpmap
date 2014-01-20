@@ -29,6 +29,18 @@ minetest.register_on_generated(function(minp, maxp, seed)
 		local bmpa, ea = bmpmap.load(mapa)
 		local bmpb, eb = bmpmap.load(mapb)
 		local bmpc, ec = bmpmap.load(mapc)
+		if not bmpa then
+                        print(("[imageloader] Failed to load image: "..(ea or "unknown error")))
+                        return
+                end
+		if not bmpb then
+                        print(("[imageloader] Failed to load image: "..(eb or "unknown error")))
+                        return
+                end
+		if not bmpc then
+                        print(("[imageloader] Failed to load image: "..(ec or "unknown error")))
+                        return
+                end
         local ni = 1
         for z = minp.z, maxp.z do
         for y = minp.y, maxp.y do
