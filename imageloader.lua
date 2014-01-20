@@ -1,5 +1,4 @@
-
-imageloader = { }
+bmpmap = { }
 
 local types = { }
 
