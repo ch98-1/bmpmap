@@ -136,7 +136,7 @@ local function read_image(f, bmp, infoheader)
         dir = (height < 0) and 1 or -1
         height = math.abs(height)
 
-        print(("[imageloader.bmp] size=%dx%d bpp=%d"):format(
+        print(("[bmpmap.bmp] size=%dx%d bpp=%d"):format(
                 infoheader.biWidth,
                 infoheader.biHeight,
                 infoheader.biBitCount
@@ -225,7 +225,7 @@ local function load_bmp_pf(f)
 
 end
 
-imageloader.register_type({
+bmpmap.register_type({
         description = "Windows or OS/2 Bitmap",
         load = load_bmp_pf,
         check = get_bmp_infoheader,

@@ -24,7 +24,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
         for z = minp.z, maxp.z do
         for y = minp.y, maxp.y do
         for x = minp.x, maxp.x do
-            data[vi] = getnode(x, y, z)
+            data[vi] = bmpmap.getnode(x, y, z)
         end
         end
         end

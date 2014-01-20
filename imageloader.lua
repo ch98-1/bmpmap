@@ -15,7 +15,7 @@ typedef = {
 }
 ]]
 
-function imageloader.register_type(def)
+function bmpmap.register_type(def)
 
         types[#types + 1] = def
 
@@ -35,14 +35,14 @@ local function find_loader(file)
 
         end
 
-        return nil, "imageloader: unknown file type"
+        return nil, "bmpmap: unknown file type"
 
 end
 
-function imageloader.load(filename)
+function bmpmap.load(filename)
 
         local f, e = io.open(filename)
-        if not f then return nil, "imageloader: "..e end
+        if not f then return nil, "bmpmap: "..e end
 
         local def, e = find_loader(f)
         if not def then return nil, e end
@@ -59,10 +59,10 @@ function imageloader.load(filename)
 
 end
 
-function imageloader.type(filename)
+function bmpmap.type(filename)
 
         local f, e = io.open(filename)
-        if not f then return nil, "imageloader: "..e end
+        if not f then return nil, "bmpmap: "..e end
 
         local def, e = find_loader(f)
         if not def then return nil, e end
@@ -71,7 +71,7 @@ function imageloader.type(filename)
 
 end
 
-function imageloader.to_schematic(bmp, pal)
+function bmpmap.to_schematic(bmp, pal)
         local data = { }
         local datai = 1
         for z = 1, bmp.h do
@@ -100,22 +100,22 @@ minetest.register_chatcommand("loadimage", {
         func = function(name, param)
                 param = param:trim()
                 if param == "" then
-                        minetest.chat_send_player(name, "[imageloader] Usage: /loadimage <filename>")
+                        minetest.chat_send_player(name, "[bmpmap] Usage: /loadimage <filename>")
                         return
                 end
-                minetest.chat_send_player(name, "[imageloader] Loading image...")
-                local bmp, e = imageloader.load(minetest.get_modpath("imageloader").."/images/"..param)
+                minetest.chat_send_player(name, "[bmpmap] Loading image...")
+                local bmp, e = bmpmap.load(minetest.get_modpath("bmpmap").."/images/"..param)
                 if not bmp then
-                        minetest.chat_send_player(name, "[imageloader] Failed to load image: "..(e or "unknown error"))
+                        minetest.chat_send_player(name, "[bmpmap] Failed to load image: "..(e or "unknown error"))
                         return
                 end
                 print(("Image loaded: size: %dx%d"):format(bmp.w, bmp.h))
-                minetest.chat_send_player(name, "[imageloader] Creating schematic...")
-                local schem = imageloader.to_schematic(bmp, palette.wool_palette)
+                minetest.chat_send_player(name, "[bmpmap] Creating schematic...")
+                local schem = bmpmap.to_schematic(bmp, palette.wool_palette)
                 print(("Schematic created: size: %dx%dx%d"):format(schem.size.x, schem.size.y, schem.size.z))
-                minetest.chat_send_player(name, "[imageloader] Placing schematic...")
+                minetest.chat_send_player(name, "[bmpmap] Placing schematic...")
                 local pos = minetest.get_player_by_name(name):getpos()
                 minetest.place_schematic(pos, schem, "0")
-                minetest.chat_send_player(name, "[imageloader] DONE!")
+                minetest.chat_send_player(name, "[bmpmap] DONE!")
         end,
 })
