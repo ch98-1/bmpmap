@@ -1,4 +1,4 @@
-local MP = minetest.get_modpath("imageloader")
+local MP = minetest.get_modpath("bmpmap")
 
 dofile(MP.."/iohelpers.lua")
 
