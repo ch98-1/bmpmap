@@ -82,7 +82,7 @@ end
 | Support function for reading the 24 bit bitmap file format, doing
 | our best to convert it down to a 256 color palette.
 ]]
-local function read_24bit_line(length, f, line)
+local function read_24bit_line(length, f, line, wmin, wmax)
 
         local ii = 0
 
@@ -92,7 +92,9 @@ local function read_24bit_line(length, f, line)
                 c.g = fgetc(f)
                 c.r = fgetc(f)
                 c.a = 255
-                line[i] = c
+                if wmin <= i <= wmax
+                   line[i] = c
+                end
                 ii = ii + 1
         end
 
@@ -111,7 +113,7 @@ end
 | Support function for reading the 32 bit bitmap file format, doing
 | our best to convert it down to a 256 color palette.
 ]]
-local function read_32bit_line(length, f, line)
+local function read_32bit_line(length, f, line, wmin, wmax)
 
         for i = 1, length do
                 local c = { }
@@ -119,7 +121,9 @@ local function read_32bit_line(length, f, line)
                 c.g = fgetc(f)
                 c.r = fgetc(f)
                 c.a = fgetc(f)
-                line[i] = c
+                if wmin <= i <= wmax
+                   line[i] = c
+                end
         end
 
 end
@@ -127,7 +131,7 @@ end
 --[[ read_image:
 | For reading the noncompressed BMP image format.
 ]]
-local function read_image(f, bmp, infoheader)
+local function read_image(f, bmp, infoheader, hmin, hmax, wmin, wmax)
 
         local i, line, height, dir
 
@@ -146,11 +150,13 @@ local function read_image(f, bmp, infoheader)
 
         for i = 1, height do
                 local row = { }
-                bmp.pixels[line] = row
+                if hmin <= i <= hmax
+                   bmp.pixels[line] = row
+                end
                 if infoheader.biBitCount == 24 then
-                        read_24bit_line(infoheader.biWidth, f, row)
+                        read_24bit_line(infoheader.biWidth, f, row, wmin, wmax)
                 elseif infoheader.biBitCount == 32 then
-                        read_32bit_line(infoheader.biWidth, f, row)
+                        read_32bit_line(infoheader.biWidth, f, row, wmin, wmax)
                 else
                         return false
                 end
