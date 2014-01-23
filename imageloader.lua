@@ -38,7 +38,7 @@ local function find_loader(file)
 
 end
 
-function bmpmap.load(filename)
+function bmpmap.load(filename, hmin, hmax, wmin, wmax)
 
         local f, e = io.open(filename)
         if not f then return nil, "bmpmap: "..e end
@@ -46,7 +46,7 @@ function bmpmap.load(filename)
         local def, e = find_loader(f)
         if not def then return nil, e end
 
-        local r, e = def.load(f)
+        local r, e = def.load(f, hmin, hmax, wmin, wmax)
 
         f:close()
 
