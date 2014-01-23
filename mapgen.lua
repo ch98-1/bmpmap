@@ -26,6 +26,10 @@ minetest.register_on_generated(function(minp, maxp, seed)
                 {x=sidelen, y=sidelen, z=sidelen}
         )
         local nvals = noise:get3dMap_flat({x=minp.x, y=minp.y, z=minp.z})
+                bmpa = { }
+                bmpb = { }
+                bmpc = { }
+                collectgarbage()
 		local bmpa, ea = bmpmap.load(mapa)
 		local bmpb, eb = bmpmap.load(mapb)
 		local bmpc, ec = bmpmap.load(mapc)
