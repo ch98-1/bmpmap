@@ -213,7 +213,7 @@ end
 | i.e. you must either reset the offset to some known place or close the
 | packfile. The packfile is not closed by this function.
 ]]
-local function load_bmp_pf(f)
+local function load_bmp_pf(f, hmin, hmax, wmin, wmax)
 
         local infoheader, e = get_bmp_infoheader(f)
 
@@ -225,7 +225,7 @@ local function load_bmp_pf(f)
                 h = math.abs(infoheader.biHeight),
         }
 
-        read_image(f, bmp, infoheader)
+        read_image(f, bmp, infoheader, hmain, hmax, wmin, wmax)
 
         return bmp
 
