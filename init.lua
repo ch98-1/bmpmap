@@ -6,6 +6,4 @@ dofile(MP.."/imageloader.lua")
 
 dofile(MP.."/loader_bmp.lua")
 
-dofile(MP.."/conf.lua")
-
 dofile(MP.."/mapgen.lua")
