@@ -225,7 +225,7 @@ local function load_bmp_pf(f, hmin, hmax, wmin, wmax)
                 h = math.abs(infoheader.biHeight),
         }
         hmin = hmin + math.floor(bmpa.h/2)
-        hmax = hmax + math.floor(bmpa.h/2)]
+        hmax = hmax + math.floor(bmpa.h/2)
         wmin = wmin + math.floor(bmpa.w/2)
         wmax = wmax + math.floor(bmpa.w/2)
         read_image(f, bmp, infoheader, hmain, hmax, wmin, wmax)
