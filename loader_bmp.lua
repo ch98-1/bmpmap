@@ -228,7 +228,7 @@ local function load_bmp_pf(f, hmin, hmax, wmin, wmax)
         hmax = hmax + math.floor(bmp.h/2)
         wmin = wmin + math.floor(bmp.w/2)
         wmax = wmax + math.floor(bmp.w/2)
-        read_image(f, bmp, infoheader, hmain, hmax, wmin, wmax)
+        read_image(f, bmp, infoheader, hmin, hmax, wmin, wmax)
 
         return bmp
 
