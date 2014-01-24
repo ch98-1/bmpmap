@@ -30,9 +30,9 @@ minetest.register_on_generated(function(minp, maxp, seed)
                 bmpb = { }
                 bmpc = { }
                 collectgarbage()
-		local bmpa, ea = bmpmap.load(mapa)
-		local bmpb, eb = bmpmap.load(mapb)
-		local bmpc, ec = bmpmap.load(mapc)
+		local bmpa, ea = bmpmap.load(mapa, minp.z, maxp.z, minp.x, maxp.x)
+		local bmpb, eb = bmpmap.load(mapb, minp.z, maxp.z, minp.x, maxp.x)
+		local bmpc, ec = bmpmap.load(mapc, minp.z, maxp.z, minp.x, maxp.x)
 		if not bmpa then
                         print(("[imageloader] Failed to load image: "..(ea or "unknown error")))
                         return
