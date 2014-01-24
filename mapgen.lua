@@ -2,7 +2,13 @@
 local mapa = minetest.get_modpath("bmpmap").."/maps/world_water.bmp"
 local mapb = minetest.get_modpath("bmpmap").."/maps/world_ice.bmp"
 local mapc = minetest.get_modpath("bmpmap").."/maps/world_elev.bmp"
--- configure more stuff at conf.lua
+-- configure needed nodes here
+ local dirt  = minetest.get_content_id("default:dirt")
+ local air = minetest.get_content_id("air")
+
+
+
+
 minetest.register_on_mapgen_init(function(mgparams)
         minetest.set_mapgen_params({mgname="singlenode", flags="nolight", flagmask="nolight"})
 end)
@@ -18,8 +24,6 @@ minetest.register_on_generated(function(minp, maxp, seed)
         local data = vm:get_data()
 
         local sidelen = maxp.x - minp.x + 1
-        
-        local air = minetest.get_content_id("air")
  
         local noise = minetest.get_perlin_map(
                 {offset=0, scale=1, spread={x=200, y=125, z=200}, seed=5, octaves=5, persist=0.6},
