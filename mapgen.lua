@@ -53,6 +53,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
         for z = minp.z, maxp.z do
         for y = minp.y, maxp.y do
         for x = minp.x, maxp.x do
+        	        local vi = a:index(x, y, z)
 			if math.floor(bmpa.w/2) < math.abs(x)  and math.floor(bmpa.h/2) < math.abs(z)then
 				local ca = bmpa.pixels[z + math.floor(bmpa.h/2)][x + math.floor(bmpa.w/2)]
 				local cb = bmpb.pixels[z + math.floor(bmpa.h/2)][x + math.floor(bmpa.w/2)]
