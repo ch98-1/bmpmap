@@ -57,7 +57,11 @@ minetest.register_on_generated(function(minp, maxp, seed)
 				local ca = bmpa.pixels[z + math.floor(bmpa.h/2)][x + math.floor(bmpa.w/2)]
 				local cb = bmpb.pixels[z + math.floor(bmpa.h/2)][x + math.floor(bmpa.w/2)]
 				local cc = bmpc.pixels[z + math.floor(bmpa.h/2)][x + math.floor(bmpa.w/2)]
-				data[vi] = bmpmap.getnode(ca, cb, cc, x, y, z)
+				if ((cc.r + cc.g + cc.b)/3) >= y then
+                                      data[vi] = dirt
+                                else
+                                      data[vi] = air
+                                end
 			else
 				data[vi] = air
 			end
