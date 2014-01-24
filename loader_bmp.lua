@@ -92,7 +92,7 @@ local function read_24bit_line(length, f, line, wmin, wmax)
                 c.g = fgetc(f)
                 c.r = fgetc(f)
                 c.a = 255
-                if wmin <= i <= wmax
+                if wmin <= i <= wmax then
                    line[i] = c
                 end
                 ii = ii + 1
@@ -121,7 +121,7 @@ local function read_32bit_line(length, f, line, wmin, wmax)
                 c.g = fgetc(f)
                 c.r = fgetc(f)
                 c.a = fgetc(f)
-                if wmin <= i <= wmax
+                if wmin <= i <= wmax then
                    line[i] = c
                 end
         end
@@ -150,7 +150,7 @@ local function read_image(f, bmp, infoheader, hmin, hmax, wmin, wmax)
 
         for i = 1, height do
                 local row = { }
-                if hmin <= i <= hmax
+                if hmin <= i <= hmax then
                    bmp.pixels[line] = row
                 end
                 if infoheader.biBitCount == 24 then
