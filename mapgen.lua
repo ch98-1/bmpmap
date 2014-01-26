@@ -60,11 +60,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 				local cc = bmpc.pixels[z + math.floor(bmpa.h/2)][x + math.floor(bmpa.w/2)]
 				if ((cc.r + cc.g + cc.b)/3) >= y then
                                       data[vi] = dirt
-                                else
-                                      data[vi] = air
                                 end
-			else
-				data[vi] = air
 			end
         end
         end
