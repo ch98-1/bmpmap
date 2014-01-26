@@ -87,13 +87,17 @@ local function read_24bit_line(length, f, line, wmin, wmax)
         local ii = 0
 
         for i = 1, length do
-                local c = { }
-                c.b = fgetc(f)
-                c.g = fgetc(f)
-                c.r = fgetc(f)
-                c.a = 255
-                if wmin <= i and i <= wmax then
+               if wmin <= i and i <= wmax then
+                   local c = { }
+                   c.b = fgetc(f)
+                   c.g = fgetc(f)
+                   c.r = fgetc(f)
+                   c.a = 255
                    line[i] = c
+                else
+                   f:read()
+                   f:read()
+                   f:read()
                 end
                 ii = ii + 1
         end
@@ -116,13 +120,18 @@ end
 local function read_32bit_line(length, f, line, wmin, wmax)
 
         for i = 1, length do
-                local c = { }
-                c.b = fgetc(f)
-                c.g = fgetc(f)
-                c.r = fgetc(f)
-                c.a = fgetc(f)
                 if wmin <= i and i <= wmax then
+                   local c = { }
+                   c.b = fgetc(f)
+                   c.g = fgetc(f)
+                   c.r = fgetc(f)
+                   c.a = fgetc(f)
                    line[i] = c
+                else
+                   f:read()
+                   f:read()
+                   f:read()
+                   f:read()
                 end
         end
 
