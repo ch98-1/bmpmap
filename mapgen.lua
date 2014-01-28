@@ -1,7 +1,5 @@
--- set images here mapa is water, mapb is ice, mapc is elevation on here.
-local mapa = minetest.get_modpath("bmpmap").."/maps/world_water.bmp"
-local mapb = minetest.get_modpath("bmpmap").."/maps/world_ice.bmp"
-local mapc = minetest.get_modpath("bmpmap").."/maps/world_elev.bmp"
+-- set images here
+local map = minetest.get_modpath("bmpmap").."/maps/world_elev.bmp"
 -- configure needed nodes here
  local dirt  = minetest.get_content_id("default:dirt")
  local air = minetest.get_content_id("air")
@@ -30,34 +28,22 @@ minetest.register_on_generated(function(minp, maxp, seed)
                 {x=sidelen, y=sidelen, z=sidelen}
         )
         local nvals = noise:get3dMap_flat({x=minp.x, y=minp.y, z=minp.z})
-                bmpa = { }
-                bmpb = { }
-                bmpc = { }
+                bmp = { }
+                bmp = { }
+                bmp = { }
                 collectgarbage()
-		local bmpa, ea = bmpmap.load(mapa, minp.z, maxp.z, minp.x, maxp.x)
-		local bmpb, eb = bmpmap.load(mapb, minp.z, maxp.z, minp.x, maxp.x)
-		local bmpc, ec = bmpmap.load(mapc, minp.z, maxp.z, minp.x, maxp.x)
-		if not bmpa then
+		local bmp, e = bmpmap.load(map, minp.z, maxp.z, minp.x, maxp.x)
+		if not bmp then
                         print(("[imageloader] Failed to load image: "..(ea or "unknown error")))
-                        return
-                end
-		if not bmpb then
-                        print(("[imageloader] Failed to load image: "..(eb or "unknown error")))
-                        return
-                end
-		if not bmpc then
-                        print(("[imageloader] Failed to load image: "..(ec or "unknown error")))
                         return
                 end
         local ni = 1
         for z = minp.z, maxp.z do
         for y = minp.y, maxp.y do
         for x = minp.x, maxp.x do
-				local ca = bmpa.pixels[z + math.floor(bmpa.h/2)][x + math.floor(bmpa.w/2)]
-				local cb = bmpb.pixels[z + math.floor(bmpa.h/2)][x + math.floor(bmpa.w/2)]
-				local cc = bmpc.pixels[z + math.floor(bmpa.h/2)][x + math.floor(bmpa.w/2)]
-			if ca and cb and cc then
-				if ((cc.r + cc.g + cc.b)/3) >= y then
+				local c = bmp.pixels[z + math.floor(bmp.h/2)][x + math.floor(bmp.w/2)]
+			if c then
+				if ((c.r + c.g + c.b)/3) >= y then
 				      local vi = a:index(x, y, z)
                                       data[vi] = dirt
                                 end
