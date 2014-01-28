@@ -61,6 +61,8 @@ minetest.register_on_generated(function(minp, maxp, seed)
 				      local vi = a:index(x, y, z)
                                       data[vi] = dirt
                                 end
+                        else
+                         print(("[bmpmap] Out of image boundry"))
 			end
         end
         end
